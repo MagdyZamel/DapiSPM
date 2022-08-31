@@ -13,7 +13,7 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "Dapi",
-            url: "https://github.com/MagdyZamel/DapiSPM/blob/Master/Dapixcframework.zip",
-            checksum: "a61c3dd6481a242f1687809bc484d7220bc044b98d8e816abd15be93f4839683")
+            url: "https://github.com/MagdyZamel/DapiSPM/blob/Master/archive.zip",
+            checksum: "cc32b458d5a4528352100302799af549631b3d860ab0132ee25c0cea0063183c")
     ]
 )
