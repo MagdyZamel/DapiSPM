@@ -14,6 +14,6 @@ let package = Package(
         .binaryTarget(
             name: "Dapi",
             url: "https://github.com/MagdyZamel/DapiSPM/blob/Master/Dapixcframework.zip",
-            checksum: "160321b25f23184e8e9a9576d06ea025")
+            checksum: "7f0a8b7a148b0a4bc1a051cd5098a3678b3568308e4d012975e728b76a7239cc")
     ]
 )
