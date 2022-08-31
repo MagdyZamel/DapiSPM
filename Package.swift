@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "DapiSDK",
-    products: [
+    products: [https://github.com/MagdyZamel/DapiSPM
         .library(
             name: "Dapi",
             targets: ["Dapi"])
@@ -14,6 +14,6 @@ let package = Package(
         .binaryTarget(
             name: "Dapi",
             url: "https://github.com/MagdyZamel/DapiSPM/blob/Master/Dapixcframework.zip",
-            checksum: "7f0a8b7a148b0a4bc1a051cd5098a3678b3568308e4d012975e728b76a7239cc")
+            checksum: "a61c3dd6481a242f1687809bc484d7220bc044b98d8e816abd15be93f4839683")
     ]
 )
