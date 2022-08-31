@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "DapiSDK",
-    products: [https://github.com/MagdyZamel/DapiSPM
+    products: [
         .library(
             name: "Dapi",
             targets: ["Dapi"])
