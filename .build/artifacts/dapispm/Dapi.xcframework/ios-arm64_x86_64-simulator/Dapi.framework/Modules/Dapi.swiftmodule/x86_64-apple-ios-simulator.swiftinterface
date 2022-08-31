@@ -1,0 +1,771 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
+// swift-module-flags: -target x86_64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Dapi
+@_exported import Dapi
+import Foundation
+import ImageIO
+import Swift
+import SystemConfiguration
+import UIKit
+import WebKit
+import _Concurrency
+extension Dapi.Dapiiii {
+  public func bankBeneficiaries(connection: Dapi.DAPIConnection, completion: @escaping ((Swift.Result<Dapi.DAPIBankBeneficiaryResponse, Swift.Error>) -> Swift.Void))
+  public func bankWireBeneficiaries(connection: Dapi.DAPIConnection, completion: @escaping ((Swift.Result<Dapi.DAPIBankWireBeneficiaryResponse, Swift.Error>) -> Swift.Void))
+  public func createBeneficiary(connection: Dapi.DAPIConnection, beneficiaryDetails beneficiary: Dapi.DAPIBeneficiary, completion: @escaping ((Swift.Result<Dapi.DAPIResponseResult, Swift.Error>) -> Swift.Void))
+  public func createWireBeneficiary(connection: Dapi.DAPIConnection, beneficiaryDetails beneficiary: Dapi.DAPIWireBeneficiary, completion: @escaping ((Swift.Result<Dapi.DAPIResponseResult, Swift.Error>) -> Swift.Void))
+  public func createTransferToExistBeneficiary(connection: Dapi.DAPIConnection, senderBankAccountID accountID: Swift.String, receiverBeneficiaryID beneficiaryID: Swift.String, amount: Swift.Float, remark: Swift.String? = nil, completion: @escaping ((Swift.Result<Dapi.DAPITransferResult, Swift.Error>) -> Swift.Void))
+  public func createWireTransferToExistBeneficiary(connection: Dapi.DAPIConnection, senderBankAccountID accountID: Swift.String, receiverBeneficiaryID beneficiaryID: Swift.String, amount: Swift.Float, remark: Swift.String? = nil, completion: @escaping ((Swift.Result<Dapi.DAPITransferResult, Swift.Error>) -> Swift.Void))
+  public func createWireTransfer(connection: Dapi.DAPIConnection, senderBankAccount account: Dapi.DAPIBankAccount, receiverBeneficiary beneficiary: Dapi.DAPIWireBeneficiary, amount: Swift.Float = 0, remark: Swift.String? = nil, completion: @escaping ((Swift.Result<Dapi.DAPITransferResult, Swift.Error>) -> Swift.Void))
+  public func createTransfer(connection: Dapi.DAPIConnection, senderBankAccount account: Dapi.DAPIBankAccount, receiverBeneficiary beneficiary: Dapi.DAPIBeneficiary, amount: Swift.Float = 0, remark: Swift.String? = nil, completion: @escaping ((Swift.Result<Dapi.DAPITransferResult, Swift.Error>) -> Swift.Void))
+}
+public enum ReachabilityError : Swift.Error {
+  case failedToCreateWithAddress(Darwin.sockaddr, Swift.Int32)
+  case failedToCreateWithHostname(Swift.String, Swift.Int32)
+  case unableToSetCallback(Swift.Int32)
+  case unableToSetDispatchQueue(Swift.Int32)
+  case unableToGetFlags(Swift.Int32)
+}
+@available(*, unavailable, renamed: "Notification.Name.reachabilityChanged")
+public let ReachabilityChangedNotification: Foundation.NSNotification.Name
+extension Foundation.NSNotification.Name {
+  public static let reachabilityChanged: Foundation.Notification.Name
+}
+public class Reachability {
+  public typealias NetworkReachable = (Dapi.Reachability) -> Swift.Void
+  public typealias NetworkUnreachable = (Dapi.Reachability) -> Swift.Void
+  @available(*, unavailable, renamed: "Connection")
+  public enum NetworkStatus : Swift.CustomStringConvertible {
+    case notReachable, reachableViaWiFi, reachableViaWWAN
+    public var description: Swift.String {
+      get
+    }
+    public static func == (a: Dapi.Reachability.NetworkStatus, b: Dapi.Reachability.NetworkStatus) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum Connection : Swift.CustomStringConvertible {
+    @available(*, deprecated, renamed: "unavailable")
+    case none
+    case unavailable, wifi, cellular
+    public var description: Swift.String {
+      get
+    }
+    public static func == (a: Dapi.Reachability.Connection, b: Dapi.Reachability.Connection) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public var whenReachable: Dapi.Reachability.NetworkReachable?
+  public var whenUnreachable: Dapi.Reachability.NetworkUnreachable?
+  @available(*, deprecated, renamed: "allowsCellularConnection")
+  final public let reachableOnWWAN: Swift.Bool
+  public var allowsCellularConnection: Swift.Bool
+  public var notificationCenter: Foundation.NotificationCenter
+  @available(*, deprecated, renamed: "connection.description")
+  public var currentReachabilityString: Swift.String {
+    get
+  }
+  @available(*, unavailable, renamed: "connection")
+  public var currentReachabilityStatus: Dapi.Reachability.Connection {
+    get
+  }
+  public var connection: Dapi.Reachability.Connection {
+    get
+  }
+  required public init(reachabilityRef: SystemConfiguration.SCNetworkReachability, queueQoS: Dispatch.DispatchQoS = .default, targetQueue: Dispatch.DispatchQueue? = nil, notificationQueue: Dispatch.DispatchQueue? = .main)
+  convenience public init(hostname: Swift.String, queueQoS: Dispatch.DispatchQoS = .default, targetQueue: Dispatch.DispatchQueue? = nil, notificationQueue: Dispatch.DispatchQueue? = .main) throws
+  convenience public init(queueQoS: Dispatch.DispatchQoS = .default, targetQueue: Dispatch.DispatchQueue? = nil, notificationQueue: Dispatch.DispatchQueue? = .main) throws
+  @objc deinit
+}
+extension Dapi.Reachability {
+  public func startNotifier() throws
+  public func stopNotifier()
+  @available(*, deprecated, message: "Please use `connection != .none`")
+  public var isReachable: Swift.Bool {
+    get
+  }
+  @available(*, deprecated, message: "Please use `connection == .cellular`")
+  public var isReachableViaWWAN: Swift.Bool {
+    get
+  }
+  @available(*, deprecated, message: "Please use `connection == .wifi`")
+  public var isReachableViaWiFi: Swift.Bool {
+    get
+  }
+  public var description: Swift.String {
+    get
+  }
+}
+public struct DAPIAccountMetadataResponse : Swift.Codable {
+  public let accountsMetadata: Dapi.DAPIAccountMetadata
+  public let operationID: Swift.String, status: Swift.String
+  public let success: Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPIAccountMetadata : Swift.Codable {
+  public let bankID: Swift.String
+  public let address: Dapi.DAPILineAddress?
+  public let bankName: Swift.String?, bankType: Swift.String?
+  public let beneficiaryCoolDownPeriod: Dapi.DAPIAccountRange?
+  public let branchAddress: Swift.String?, branchName: Swift.String?
+  public let country: Dapi.DAPIPair?
+  public let isCreateBeneficiaryEndpointRequired: Swift.Bool?
+  public let isCreateWireBeneficiaryEndpointRequired: Swift.Bool?
+  public let sortCode: Swift.String?
+  public let swiftCode: Swift.String?
+  public let transactionRange: Dapi.DAPIAccountRange?
+  public let transferBounds: [Dapi.DAPITransferBound]?
+  public let willNewlyAddedBeneficiaryExistBeforeCoolDownPeriod: Swift.Bool?
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPILineAddress : Swift.Codable {
+  public var line1: Swift.String?, line2: Swift.String?, line3: Swift.String?
+  public init()
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPIAccountRange : Swift.Codable {
+  public let unit: Swift.String
+  public let value: Swift.Float
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPIPair : Swift.Codable {
+  public var code: Swift.String?, name: Swift.String?
+  public init()
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPITransferBound : Swift.Codable {
+  public var currency: Dapi.DAPIPair?
+  public var minimum: Swift.Float?
+  public var type: Swift.String?
+  public init()
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class DAPIConnectVC : UIKit.UIViewController {
+  @_Concurrency.MainActor(unsafe) weak public var delegate: Dapi.DAPIConnectDelegate?
+  @_Concurrency.MainActor(unsafe) public init(bankID: Swift.String? = nil)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func loadView()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
+  @objc deinit
+}
+extension Dapi.DAPIConnectVC : WebKit.WKUIDelegate, WebKit.WKNavigationDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: WebKit.WKWebView, createWebViewWith configuration: WebKit.WKWebViewConfiguration, for navigationAction: WebKit.WKNavigationAction, windowFeatures: WebKit.WKWindowFeatures) -> WebKit.WKWebView?
+}
+extension Dapi.DAPIConnectVC : Dapi.MessageViewControllerDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func messageViewControllerDidTapButton(_ messageViewController: Dapi.MessageViewController, error: Swift.Error?)
+}
+extension Dapi.DAPIConnectVC : UIKit.UIAdaptivePresentationControllerDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func presentationControllerDidDismiss(_ presentationController: UIKit.UIPresentationController)
+}
+extension Dapi.Dapiiii {
+  public func accountMetadata(connection: Dapi.DAPIConnection, completion: @escaping ((Swift.Result<Dapi.DAPIAccountMetadataResponse, Swift.Error>) -> Swift.Void))
+  public func identity(connection: Dapi.DAPIConnection, completion: @escaping ((Swift.Result<Dapi.DAPIIdentityResponse, Swift.Error>) -> Swift.Void))
+  public func bankAccounts(connection: Dapi.DAPIConnection, completion: @escaping ((Swift.Result<Dapi.DAPIBankAccountsResponse, Swift.Error>) -> Swift.Void))
+  public func bankCards(connection: Dapi.DAPIConnection, completion: @escaping ((Swift.Result<Dapi.DAPIBankCardsResponse, Swift.Error>) -> Swift.Void))
+  public func cardTransactions(connection: Dapi.DAPIConnection, cardID id: Swift.String, from startDate: Foundation.Date, to endDate: Foundation.Date, completion: @escaping ((Swift.Result<Dapi.DAPITransactionsResponse, Swift.Error>) -> Swift.Void))
+  public func accountTransactions(connection: Dapi.DAPIConnection, bankAccountID id: Swift.String, from startDate: Foundation.Date, to endDate: Foundation.Date, completion: @escaping ((Swift.Result<Dapi.DAPITransactionsResponse, Swift.Error>) -> Swift.Void))
+}
+public enum DAPICountry {
+  case ae
+  case sa
+  case eg
+  case us
+  case kw
+  case za
+  case jo
+  case pk
+  case ng
+  case mx
+  case qa
+  case ca
+  case countryCode(code: Swift.String)
+}
+public enum TransferType {
+  case normal
+  case wire
+  public static func == (a: Dapi.TransferType, b: Dapi.TransferType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class DAPIAutoFlowVC : UIKit.UINavigationController {
+  @_Concurrency.MainActor(unsafe) public var transferDidSuccess: ((Dapi.DAPITransferResult) -> Swift.Void)?
+  @_Concurrency.MainActor(unsafe) public var transferDidFailed: ((Swift.Error) -> Swift.Void)?
+  @_Concurrency.MainActor(unsafe) weak public var autoFlowDelegate: Dapi.DAPIAutoFlowDelegate?
+  @_Concurrency.MainActor(unsafe) public init(connection: Dapi.DAPIConnection, account: Dapi.DAPIBankAccount? = nil, wireBeneficiary: Dapi.DAPIWireBeneficiary? = nil, beneficiary: Dapi.DAPIBeneficiary? = nil, transferType: Dapi.TransferType, amount: Swift.Float = 0, remark: Swift.String? = nil)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
+  @objc deinit
+}
+extension Dapi.DAPIAutoFlowVC : Dapi.DPCNumPadDisplayViewControllerDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func numPadDisplayViewController(_ viewController: Dapi.DPCNumPadDisplayViewController, didSubmitValue value: Swift.Double)
+}
+extension Dapi.DAPIAutoFlowVC : Dapi.MessageViewControllerDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func messageViewControllerDidTapButton(_ messageViewController: Dapi.MessageViewController, error: Swift.Error?)
+}
+extension Dapi.DAPIAutoFlowVC : UIKit.UIAdaptivePresentationControllerDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func presentationControllerDidDismiss(_ presentationController: UIKit.UIPresentationController)
+}
+public protocol ResolverRegistering {
+  static func registerAllServices()
+}
+public protocol Resolving {
+  var resolver: Dapi.Resolver { get }
+}
+extension Dapi.Resolving {
+  public var resolver: Dapi.Resolver {
+    get
+  }
+}
+final public class Resolver {
+  public static let main: Dapi.Resolver
+  public static var root: Dapi.Resolver
+  public static var defaultScope: Dapi.ResolverScope
+  public init(parent: Dapi.Resolver? = nil)
+  final public func registerServices()
+  public static var registerServices: (() -> Swift.Void)?
+  @discardableResult
+  public static func register<Service>(_ type: Service.Type = Service.self, name: Dapi.ContainerIdentifier? = nil, factory: @escaping Dapi.ResolverFactory<Service>) -> Dapi.ResolverOptions<Service>
+  @discardableResult
+  public static func register<Service>(_ type: Service.Type = Service.self, name: Dapi.ContainerIdentifier? = nil, factory: @escaping Dapi.ResolverFactoryResolver<Service>) -> Dapi.ResolverOptions<Service>
+  @discardableResult
+  public static func register<Service>(_ type: Service.Type = Service.self, name: Dapi.ContainerIdentifier? = nil, factory: @escaping Dapi.ResolverFactoryArguments<Service>) -> Dapi.ResolverOptions<Service>
+  @discardableResult
+  final public func register<Service>(_ type: Service.Type = Service.self, name: Dapi.ContainerIdentifier? = nil, factory: @escaping Dapi.ResolverFactory<Service>) -> Dapi.ResolverOptions<Service>
+  @discardableResult
+  final public func register<Service>(_ type: Service.Type = Service.self, name: Dapi.ContainerIdentifier? = nil, factory: @escaping Dapi.ResolverFactoryResolver<Service>) -> Dapi.ResolverOptions<Service>
+  @discardableResult
+  final public func register<Service>(_ type: Service.Type = Service.self, name: Dapi.ContainerIdentifier? = nil, factory: @escaping Dapi.ResolverFactoryArguments<Service>) -> Dapi.ResolverOptions<Service>
+  public static func resolve<Service>(_ type: Service.Type = Service.self, name: Dapi.ContainerIdentifier? = nil, args: Any? = nil) -> Service
+  final public func resolve<Service>(_ type: Service.Type = Service.self, name: Dapi.ContainerIdentifier? = nil, args: Any? = nil) -> Service
+  public static func optional<Service>(_ type: Service.Type = Service.self, name: Dapi.ContainerIdentifier? = nil, args: Any? = nil) -> Service?
+  final public func optional<Service>(_ type: Service.Type = Service.self, name: Dapi.ContainerIdentifier? = nil, args: Any? = nil) -> Service?
+  @objc deinit
+}
+public typealias ResolverFactory<Service> = () -> Service?
+public typealias ResolverFactoryResolver<Service> = (_ resolver: Dapi.Resolver) -> Service?
+public typealias ResolverFactoryArguments<Service> = (_ resolver: Dapi.Resolver, _ args: Any?) -> Service?
+public typealias ResolverFactoryMutator<Service> = (_ resolver: Dapi.Resolver, _ service: Service) -> Swift.Void
+public typealias ResolverFactoryMutatorArguments<Service> = (_ resolver: Dapi.Resolver, _ service: Service, _ args: Any?) -> Swift.Void
+public class ResolverOptions<Service> {
+  public var scope: Dapi.ResolverScope
+  public init(resolver: Dapi.Resolver, factory: @escaping Dapi.ResolverFactoryArguments<Service>)
+  @discardableResult
+  final public func implements<Protocol>(_ type: Protocol.Type, name: Dapi.ContainerIdentifier? = nil) -> Dapi.ResolverOptions<Service>
+  @discardableResult
+  final public func resolveProperties(_ block: @escaping Dapi.ResolverFactoryMutator<Service>) -> Dapi.ResolverOptions<Service>
+  @discardableResult
+  final public func resolveProperties(_ block: @escaping Dapi.ResolverFactoryMutatorArguments<Service>) -> Dapi.ResolverOptions<Service>
+  @discardableResult
+  final public func scope(_ scope: Dapi.ResolverScope) -> Dapi.ResolverOptions<Service>
+  @objc deinit
+}
+final public class ResolverRegistration<Service> : Dapi.ResolverOptions<Service> {
+  final public var key: Swift.Int
+  final public var cacheKey: Swift.String
+  public init(resolver: Dapi.Resolver, key: Swift.Int, name: Dapi.ContainerIdentifier?, factory: @escaping Dapi.ResolverFactoryArguments<Service>)
+  final public func resolve(resolver: Dapi.Resolver, args: Any?) -> Service?
+  @objc deinit
+}
+extension Dapi.Resolver {
+  public static let application: Dapi.ResolverScopeApplication
+  public static let cached: Dapi.ResolverScopeCache
+  public static let graph: Dapi.ResolverScopeGraph
+  public static let shared: Dapi.ResolverScopeShare
+  public static let unique: Dapi.ResolverScopeUnique
+}
+public protocol ResolverScope : AnyObject {
+  func resolve<Service>(resolver: Dapi.Resolver, registration: Dapi.ResolverRegistration<Service>, args: Any?) -> Service?
+}
+public class ResolverScopeApplication : Dapi.ResolverScope {
+  public init()
+  final public func resolve<Service>(resolver: Dapi.Resolver, registration: Dapi.ResolverRegistration<Service>, args: Any?) -> Service?
+  @objc deinit
+}
+@_inheritsConvenienceInitializers final public class ResolverScopeCache : Dapi.ResolverScopeApplication {
+  override public init()
+  final public func reset()
+  @objc deinit
+}
+final public class ResolverScopeGraph : Dapi.ResolverScope {
+  public init()
+  final public func resolve<Service>(resolver: Dapi.Resolver, registration: Dapi.ResolverRegistration<Service>, args: Any?) -> Service?
+  @objc deinit
+}
+final public class ResolverScopeShare : Dapi.ResolverScope {
+  public init()
+  final public func resolve<Service>(resolver: Dapi.Resolver, registration: Dapi.ResolverRegistration<Service>, args: Any?) -> Service?
+  final public func reset()
+  @objc deinit
+}
+final public class ResolverScopeUnique : Dapi.ResolverScope {
+  public init()
+  final public func resolve<Service>(resolver: Dapi.Resolver, registration: Dapi.ResolverRegistration<Service>, args: Any?) -> Service?
+  @objc deinit
+}
+public protocol StoryboardResolving : Dapi.Resolving {
+  func resolveViewController()
+}
+extension UIKit.UIViewController {
+  @objc @_Concurrency.MainActor(unsafe) dynamic public var resolving: Swift.Bool {
+    @objc get
+    @objc set
+  }
+}
+@propertyWrapper public struct Injected<Service> {
+  public init()
+  public init(name: Dapi.ContainerIdentifier? = nil, container: Dapi.Resolver? = nil)
+  public var wrappedValue: Service {
+    get
+    set
+  }
+  public var projectedValue: Dapi.Injected<Service> {
+    get
+    set
+  }
+}
+@propertyWrapper public struct LazyInjected<Service> {
+  public var container: Dapi.Resolver?
+  public var name: Dapi.ContainerIdentifier?
+  public init()
+  public init(name: Dapi.ContainerIdentifier? = nil, container: Dapi.Resolver? = nil)
+  public var isEmpty: Swift.Bool {
+    get
+  }
+  public var wrappedValue: Service {
+    mutating get
+    set
+  }
+  public var projectedValue: Dapi.LazyInjected<Service> {
+    get
+    set
+  }
+  public mutating func release()
+}
+extension Dapi.Resolver {
+  final public func resolve<Service>(_ type: Service.Type = Service.self, name: Dapi.ContainerIdentifier? = nil, arg0: Any? = nil, arg1: Any? = nil, arg2: Any? = nil, arg3: Any? = nil, arg4: Any? = nil, arg5: Any? = nil) -> Service
+  final public func resolve<Service>(_ type: Service.Type = Service.self, name: Dapi.ContainerIdentifier? = nil, params: Any...) -> Service
+  final public func resolveArguments(from args: Any) -> [Any]
+}
+public struct ContainerIdentifier {
+}
+extension Swift.Error {
+  public var dapiMetaData: Dapi.DAPIResponseResult? {
+    get
+  }
+  public var dapiErrorMessage: Swift.String {
+    get
+  }
+}
+@objc extension Foundation.NSError {
+  @objc dynamic public var dapiErrorMessage: Swift.String {
+    @objc get
+  }
+}
+public struct DAPIResponseResult : Swift.Codable, Swift.CustomStringConvertible {
+  public var operationID: Swift.String?
+  public var status: Swift.String?
+  public var message: Swift.String?
+  public var statusCode: Swift.Int?
+  public var description: Swift.String {
+    get
+  }
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPITransactionsResponse : Swift.Codable {
+  public let transactions: [Dapi.DAPITransaction]
+  public let operationID: Swift.String, status: Swift.String
+  public let success: Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPITransaction : Swift.Codable {
+  public var type: Swift.String
+  public var amount: Swift.Float
+  public var beforeAmount: Swift.Float?
+  public var afterAmount: Swift.Float?
+  public var description: Swift.String?
+  public var details: Swift.String?
+  public var currency: Dapi.DAPIPair?
+  public var reference: Swift.String?
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPIBeneficiary : Swift.Codable {
+  public var accountNumber: Swift.String?
+  public var name: Swift.String?
+  public var bankName: Swift.String?
+  public var swiftCode: Swift.String?
+  public var iban: Swift.String?
+  public var phoneNumber: Swift.String?
+  public var country: Swift.String?
+  public var branchAddress: Swift.String?
+  public var branchName: Swift.String?
+  public var nickname: Swift.String?
+  public var linesAddress: Dapi.DAPILineAddress?
+  public init()
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class Dapiiii {
+  public static var shared: Dapi.Dapiiii
+  public func start(appKey: Swift.String, clientID: Swift.String, configurations: Dapi.DAPIConfigurations? = nil, completion: @escaping ((Swift.Result<Dapi.Dapiiii, Swift.Error>) -> Swift.Void))
+  public var connections: [Dapi.DAPIConnection] {
+    get
+  }
+  public func createConnection(connectionParameters: [Swift.String : Any], completion: @escaping ((Swift.Result<Dapi.DAPIConnection, Swift.Error>) -> Swift.Void))
+  public func delink(connection: Dapi.DAPIConnection, completion: @escaping ((Swift.Result<Dapi.DAPIResponseResult, Swift.Error>) -> Swift.Void))
+  @objc deinit
+}
+public enum DAPIEnvironment : Swift.String {
+  case production
+  case sandbox
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public class DAPIConfigurations {
+  public var countries: [Dapi.DAPICountry]
+  public var environment: Dapi.DAPIEnvironment
+  public var endpoints: [Dapi.DAPIEndpoint : Swift.String]
+  public var endPointExtraQueryItems: [Dapi.DAPIEndpoint : [Foundation.URLQueryItem]]
+  public var endPointExtraHeaderFields: [Dapi.DAPIEndpoint : [Swift.String : Swift.String]]
+  public var endPointExtraBody: [Dapi.DAPIEndpoint : [Swift.String : Any]]
+  public var showLogos: Swift.Bool
+  public var showTransferSuccessfulResult: Swift.Bool
+  public var showTransferErrorResult: Swift.Bool
+  public init(countries: [Dapi.DAPICountry], environment: Dapi.DAPIEnvironment)
+  public init()
+  @objc deinit
+}
+extension UIKit.UIImage {
+  @objc dynamic public class func gif(data: Foundation.Data) -> UIKit.UIImage?
+  public class func gif(url: Swift.String) -> UIKit.UIImage?
+  @objc dynamic public class func gif(name: Swift.String) -> UIKit.UIImage?
+  @available(iOS 9.0, *)
+  public class func gif(asset: Swift.String) -> UIKit.UIImage?
+}
+@objc public class MFAColorScheme : ObjectiveC.NSObject {
+  @objc public var primaryColor: UIKit.UIColor {
+    @objc get
+  }
+  @objc public var secondaryColor: UIKit.UIColor {
+    @objc get
+  }
+  public init(hexPrimaryColor: Swift.String?, hexSecondaryColor: Swift.String?)
+  @objc deinit
+}
+public struct DAPIBankAccountsResponse : Swift.Codable {
+  public let accounts: [Dapi.DAPIBankAccount]
+  public let operationID: Swift.String, status: Swift.String
+  public let success: Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPIBankAccount : Swift.Codable {
+  public var id: Swift.String
+  public var number: Swift.String
+  public var iban: Swift.String?
+  public var type: Swift.String?
+  public var name: Swift.String?
+  public var currency: Dapi.DAPIPair?
+  public var balance: Dapi.DAPIBalance
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPIBalance : Swift.Codable {
+  public var currency: Dapi.DAPIPair?
+  public var amount: Swift.Float
+  public var accountNumber: Swift.String?
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPIIdentityResponse : Swift.Codable {
+  public let identity: Dapi.DAPIIdentity
+  public let operationID: Swift.String, status: Swift.String
+  public let success: Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPIIdentity : Swift.Codable {
+  public var name: Swift.String
+  public var nationality: Swift.String?
+  public var dateOfBirth: Swift.String?
+  public var emailAddress: Swift.String?
+  public var address: Dapi.DAPIAddress?
+  public var numbers: [Dapi.DAPINumber]?
+  public var identifications: [Dapi.DAPIIdentification]?
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPIAddress : Swift.Codable {
+  public var flat: Swift.String?
+  public var building: Swift.String?
+  public var full: Swift.String?
+  public var area: Swift.String?
+  public var poBox: Swift.String?
+  public var city: Swift.String?
+  public var state: Swift.String?
+  public var country: Swift.String?
+  public var zipCode: Swift.String?
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPINumber : Swift.Codable {
+  public var type: Swift.String?
+  public var value: Swift.String?
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPIIdentification : Swift.Codable {
+  public var type: Swift.String?
+  public var value: Swift.String?
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPIConnection : Swift.Codable, Swift.Hashable {
+  public var userSecret: Swift.String
+  public var connectionID: Swift.String
+  public var userID: Swift.String
+  public var tokenID: Swift.String
+  public var clientUserID: Swift.String
+  public var bankInfo: Dapi.DAPIBankInfo
+  public static func == (lhs: Dapi.DAPIConnection, rhs: Dapi.DAPIConnection) -> Swift.Bool
+  public func getParameters() -> [Swift.String : Any?]
+  public func hash(into hasher: inout Swift.Hasher)
+  public func encode(to encoder: Swift.Encoder) throws
+  public var hashValue: Swift.Int {
+    get
+  }
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPIBankInfo : Swift.Codable, Swift.Hashable {
+  public var bankId: Swift.String
+  public var bankFullName: Swift.String
+  public var bankShortName: Swift.String?
+  public var bankFullLogoPng: Swift.String?
+  public var bankHalfLogoPng: Swift.String?
+  public var bankMiniLogoPng: Swift.String?
+  public var primaryColor: Swift.String?
+  public var secondaryColor: Swift.String?
+  public var swiftCode: Swift.String?
+  public var countryName: Swift.String?
+  public static func == (lhs: Dapi.DAPIBankInfo, rhs: Dapi.DAPIBankInfo) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public func encode(to encoder: Swift.Encoder) throws
+  public var hashValue: Swift.Int {
+    get
+  }
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPIBankCardsResponse : Swift.Codable {
+  public let cards: [Dapi.DAPIBankCard]
+  public let operationID: Swift.String, status: Swift.String
+  public let success: Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPIBankCard : Swift.Codable {
+  public var id: Swift.String
+  public var cardNumber: Swift.String
+  public var creditLimit: Swift.Float?
+  public var status: Dapi.DAPICardStatus?
+  public var name: Swift.String?
+  public var type: Swift.String?
+  public var currency: Dapi.DAPIPair?
+  public var balance: Dapi.DAPICardBalance?
+  public var cardExpiryDate: Foundation.Date? {
+    get
+  }
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public enum DAPICardStatus : Swift.String, Swift.Codable {
+  case active
+  case disabled
+  case blocked
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct DAPICardBalance : Swift.Codable {
+  public var currency: Dapi.DAPIPair?
+  public var cardNumber: Swift.String?
+  public var outstandingBalance: Swift.Float?
+  public var availableBalance: Swift.Float?
+  public var amountDue: Swift.Float?
+  public var paymentDueDate: Foundation.Date? {
+    get
+  }
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+extension Dapi.ContainerIdentifier {
+  public static var baseUseCase: Dapi.ContainerIdentifier
+}
+extension Dapi.Resolver : Dapi.ResolverRegistering {
+  public static func registerAllServices()
+}
+public enum DAPIEndpoint : Swift.String, Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+  case exchangeToken
+  case accountMetadata
+  case identity
+  case accounts
+  case transactions
+  case getCards
+  case beneficiaries
+  case wireBeneficiaries
+  case createBeneficiary
+  case createWireBeneficiaries
+  case createWireTransferToExistingBeneficiary
+  case createTransferToExistingBeneficiary
+  case createWireTransfer
+  case createTransfer
+  case delinkUser
+  case all
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct DAPIBankBeneficiaryResponse : Swift.Codable {
+  public var beneficiaries: [Dapi.DAPIBankBeneficiary]
+  public let operationID: Swift.String, status: Swift.String
+  public let success: Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPIBankBeneficiary : Swift.Codable {
+  public var id: Swift.String
+  public var accountNumber: Swift.String
+  public var name: Swift.String?
+  public var iban: Swift.String?
+  public var type: Swift.String?
+  public var status: Swift.String?
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers @objc public class MFAParameter : ObjectiveC.NSObject, Swift.Codable {
+  @objc public var identifier: Swift.String?
+  @objc public var query: Swift.String?
+  @objc public var answer: Swift.String?
+  @objc public var hint: Swift.String? {
+    @objc get
+  }
+  @objc public var index: Foundation.NSNumber {
+    @objc get
+  }
+  @objc deinit
+  public func encode(to encoder: Swift.Encoder) throws
+  required public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPIWireBeneficiary : Swift.Codable {
+  public var name: Swift.String?
+  public var firstName: Swift.String?
+  public var lastName: Swift.String?
+  public var nickname: Swift.String?
+  public var accountNumber: Swift.String?
+  public var routingNumber: Swift.String?
+  public var receiverAccountType: Swift.String?
+  public var receiverType: Swift.String?
+  public var zipCode: Swift.String?
+  public var country: Swift.String?
+  public var state: Swift.String?
+  public var city: Swift.String?
+  public var bankName: Swift.String?
+  public var linesAddress: Dapi.DAPILineAddress?
+  public init()
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+extension UIKit.UIButton {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func sendAction(_ action: ObjectiveC.Selector, to target: Any?, for event: UIKit.UIEvent?)
+}
+public protocol DAPIConnectDelegate : AnyObject {
+  func dapiConnect(_ dapiConnect: Dapi.DAPIConnectVC, didSuccessfullyConnectTo bankID: Swift.String?, connection: Dapi.DAPIConnection)
+  func dapiConnect(_ dapiConnect: Dapi.DAPIConnectVC, didFailConnectingWith error: Swift.String)
+  func dapiConnectUserDidCanceled(_ dapiConnect: Dapi.DAPIConnectVC)
+}
+public struct DAPITransferResult : Swift.Codable {
+  public let operationID: Swift.String?
+  public let message: Swift.String?
+  public let referenceNumber: Swift.String?
+  public let statusCode: Swift.Int?
+  public let remark: Swift.String?
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPIBankWireBeneficiaryResponse : Swift.Codable {
+  public var beneficiaries: [Dapi.DAPIBankWireBeneficiary]
+  public let operationID: Swift.String, status: Swift.String
+  public let success: Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPIBankWireBeneficiary : Swift.Codable {
+  public var id: Swift.String
+  public var accountNumber: Swift.String
+  public var name: Swift.String?
+  public var address: Dapi.DAPIWireAddress?
+  public var bankName: Swift.String?
+  public var routingNumber: Swift.String?
+  public var type: Swift.String?
+  public var status: Swift.String?
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct DAPIWireAddress : Swift.Codable {
+  public var building: Swift.String?
+  public var area: Swift.String?
+  public var city: Swift.String?
+  public var country: Swift.String?
+  public var flat: Swift.String?
+  public var full: Swift.String?
+  public var poBox: Swift.String?
+  public var state: Swift.String?
+  public var zipCode: Swift.String?
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public protocol DAPIAutoFlowDelegate : AnyObject {
+  func autoFlow(_ autoFlow: Dapi.DAPIAutoFlowVC, willTransferAmount amount: Swift.Float, fromAccount senderAccount: Dapi.DAPIBankAccount)
+  func autoFlow(_ autoFlow: Dapi.DAPIAutoFlowVC, transferDidFailFrom senderAccount: Dapi.DAPIBankAccount?, to beneficiary: Dapi.DAPIBeneficiary?, with error: Swift.Error)
+  func autoFlow(_ autoFlow: Dapi.DAPIAutoFlowVC, transferDidFailFrom senderAccount: Dapi.DAPIBankAccount?, to wireBeneficiary: Dapi.DAPIWireBeneficiary?, with error: Swift.Error)
+  func autoFlow(_ autoFlow: Dapi.DAPIAutoFlowVC, transferDidSuccessFrom senderAccount: Dapi.DAPIBankAccount)
+  func autoFlowUserDidCanceled(_ autoFlow: Dapi.DAPIAutoFlowVC)
+}
+@available(*, unavailable, renamed: "Connection")
+extension Dapi.Reachability.NetworkStatus : Swift.Equatable {}
+@available(*, unavailable, renamed: "Connection")
+extension Dapi.Reachability.NetworkStatus : Swift.Hashable {}
+extension Dapi.Reachability.Connection : Swift.Equatable {}
+extension Dapi.Reachability.Connection : Swift.Hashable {}
+extension Dapi.TransferType : Swift.Equatable {}
+extension Dapi.TransferType : Swift.Hashable {}
+extension Dapi.DAPIEnvironment : Swift.Equatable {}
+extension Dapi.DAPIEnvironment : Swift.Hashable {}
+extension Dapi.DAPIEnvironment : Swift.RawRepresentable {}
+extension Dapi.DAPICardStatus : Swift.Equatable {}
+extension Dapi.DAPICardStatus : Swift.Hashable {}
+extension Dapi.DAPICardStatus : Swift.RawRepresentable {}
+extension Dapi.DAPIEndpoint : Swift.Equatable {}
+extension Dapi.DAPIEndpoint : Swift.Hashable {}
+extension Dapi.DAPIEndpoint : Swift.RawRepresentable {}
